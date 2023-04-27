@@ -1,7 +1,15 @@
-const { launches } = require('../../models/launches.model');
+const { getAllLaunches, addNewLaunch } = require('../../models/launches.model');
 
-const getAllLaunches = (req, res) => {
-  return res.status(200).json(Array.from(launches.values()));
+const httpGetAllLaunches = (req, res) => {
+  return res.status(200).json(getAllLaunches());
 };
 
-module.exports = getAllLaunches;
+function httpPostNewLaunch(req, res) {
+  const launch = req.body;
+  launch.launchDate = new Date(launch.launchDate);
+  addNewLaunch(launch);
+
+  res.status(201).json(launch);
+}
+
+module.exports = { httpGetAllLaunches, httpPostNewLaunch };
