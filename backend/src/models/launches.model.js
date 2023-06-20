@@ -1,4 +1,4 @@
-const { Launch } = require('./launches.mongo');
+const { Launch } = require('./mongo/launches.mongo');
 
 const launches = new Map();
 

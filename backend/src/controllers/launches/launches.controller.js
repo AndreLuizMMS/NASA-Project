@@ -42,4 +42,6 @@ function httpDeleteLaunch(req, res) {
   }
 }
 
-module.exports = { httpGetAllLaunches, httpPostNewLaunch, httpDeleteLaunch };
+const launches = { httpGetAllLaunches, httpPostNewLaunch, httpDeleteLaunch };
+
+module.exports = launches;

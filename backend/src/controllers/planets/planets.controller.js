@@ -4,4 +4,5 @@ function httpGetAllPlanets(req, res) {
   return res.status(200).json(getAllPlanets());
 }
 
-module.exports = { httpGetAllPlanets };
+const planets = { httpGetAllPlanets };
+module.exports = planets;

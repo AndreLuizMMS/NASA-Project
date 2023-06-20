@@ -2,7 +2,7 @@ const { error } = require('console');
 const { parse } = require('csv-parse');
 const fs = require('fs');
 
-const { Planet } = require('./planets.mongo');
+const { Planet } = require('./mongo/planets.mongo');
 
 const habitablePlanets = [];
 

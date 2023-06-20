@@ -1,10 +1,16 @@
 const express = require('express');
+
 const api_v1 = express.Router();
+const planetsRouter = require('./planets');
+const launchesRouter = require('./launches');
 
-const planetsRouter = require('./planets/planets.router');
-const launchesRouter = require('./launches/launches.router');
+api_v1.get('/', (req, res) => {
+  return res.status(200).json({
+    connection: 'ok'
+  });
+});
 
-api_v1.use('/planets', planetsRouter); // handle routing from '/planets'
-api_v1.use('/launches', launchesRouter); // handle routing from '/launches'
+api_v1.use('/launches', launchesRouter);
+api_v1.use('/planets', planetsRouter);
 
 module.exports = api_v1;

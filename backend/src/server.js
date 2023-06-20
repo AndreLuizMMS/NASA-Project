@@ -13,6 +13,7 @@ const server = http.createServer(app);
 mongoose.connection.once('open', () => {
   console.log('MongoDb connection ready!');
 });
+
 mongoose.connection.on('error', error => {
   console.error('Error: ', error);
 });
@@ -23,6 +24,7 @@ async function startServer() {
     useUnifiedTopology: true
   });
   await loadPlanets();
-  server.listen(PORT, () => console.log(`Running on ${PORT} `));
+  server.listen(PORT, () => console.log(`Running on http://localhost:${PORT}/ `));
 }
+
 startServer();
