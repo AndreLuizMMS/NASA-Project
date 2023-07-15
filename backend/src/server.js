@@ -6,6 +6,8 @@ const http = require('http');
 const mongoose = require('mongoose');
 const app = require('./app');
 
+const { populateLaunches } = require('./models/launches.model');
+
 const PORT = process.env.PORT || 2323;
 const MONGO_URL = `mongodb+srv://${mogodb_user}:${mogodb_password}@nasa-mission-control.lckppke.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -17,6 +19,7 @@ mongoose.connection.on('error', error => {
 
 async function startServer() {
   await mongoose.connect(MONGO_URL);
+  await populateLaunches();
   server.listen(PORT, () => console.log(`Running on http://localhost:${PORT}/ `));
 }
 

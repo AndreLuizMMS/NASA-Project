@@ -4,7 +4,10 @@ const app = require('../../app');
 
 describe('Test GET /launches ', () => {
   test('respond with 200 status code', async () => {
-    await request(app).get('/v1/launches').expect('Content-Type', /json/).expect(200);
+    return await request(app)
+      .get('/v1/launches')
+      .expect('Content-Type', /json/)
+      .expect(200);
   });
 });
 

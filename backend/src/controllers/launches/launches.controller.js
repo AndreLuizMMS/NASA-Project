@@ -1,10 +1,16 @@
-const Launches = require('../../models/mongo/launches.mongo');
-const { saveLaunch, deleteLaunch } = require('../../models/launches.model');
+const {
+  saveClientLaunch,
+  deleteLaunch,
+  getAllLaunches
+} = require('../../models/launches.model');
 
-const httpGetAllLaunches = async (req, res) => {
-  const launches = await Launches.find({});
+const { getPagination } = require('../../services/query');
+
+async function httpGetAllLaunches(req, res) {
+  const { skip, limit } = getPagination(req.query);
+  const launches = await getAllLaunches(skip, limit);
   return res.status(200).json(launches);
-};
+}
 
 async function httpPostNewLaunch(req, res) {
   const launch = req.body;
@@ -20,9 +26,8 @@ async function httpPostNewLaunch(req, res) {
   }
 
   let addedLaunch;
-
   try {
-    addedLaunch = await saveLaunch(launch);
+    addedLaunch = await saveClientLaunch(launch);
   } catch (error) {
     return res.status(404).json({ error: error.message });
   }
@@ -41,6 +46,7 @@ function launchIsValid(launch) {
   if (!launch.launchDate || !launch.rocket || !launch.mission || !launch.target) {
     return false;
   }
+  return true;
 }
 
 const launches = { httpGetAllLaunches, httpPostNewLaunch, httpDeleteLaunch };
